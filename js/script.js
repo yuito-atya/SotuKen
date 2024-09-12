@@ -10,6 +10,7 @@ let times=0;
 let deckId="";
 let restCard=""; 
 let oneMoreTime=0;
+let restDeck=0;
 
 //ページのロード時に実行
 window.addEventListener("load", async() => {
@@ -17,8 +18,9 @@ window.addEventListener("load", async() => {
     const apiUrl = "https://deckofcardsapi.com/api/deck/new/shuffle/?cards=AS,AC,2S,2D,2C,2H,3S,3D,3C,3H,4S,4D,4C,4H,5S,5D,5C,5H,6S,6D,6C,6H,7S,7D,7C,7H,8S,8D,8C,8H,9S,9D,9C,9H,0S,0D,0C,0H,JS,JC,QS,QC,KS,KC";
     const response = await fetch(apiUrl);
     card = await response.json();
-    console.log(card)
     deckId = card.deck_id;
+    restDeck = card.remaining;
+    console.log(restDeck);
     //最初の4枚を表示
     fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
         .then(response => response.json())
@@ -72,9 +74,14 @@ function chooseCards (img,index) {
             selectedCards.push(index);
             img.classList.add('selected');
             if(card.includes('S') || card.includes('C')){
-                document.getElementById('chooseEnemy').disabled = false;
+                chooseEnemy();
             }else if(card.includes('D')){
-                document.getElementById('chooseWeapon').disabled = false;
+                if(weapon !==0){
+                    chooseWeapon();
+                }else{
+                    document.getElementById('chooseWeapon').disabled = false;
+                }
+                
             }else{
                 document.getElementById('choosePortion').disabled = false;
             }
@@ -82,7 +89,7 @@ function chooseCards (img,index) {
             selectedCards = selectedCards.filter(i => i !== index);
             img.classList.remove('selected'); 
             if(card.includes('S') || card.includes('C')){
-                document.getElementById('chooseEnemy').disabled = true;
+
             }else if(card.includes('D')){
                 document.getElementById('chooseWeapon').disabled = true;
             }else{
@@ -150,14 +157,18 @@ function chooseEnemy(){
                 break;
             }
     }
+    restCards -=1;
+    restDeck -=1;
     if(hp < 1){
         gameOver();
+    }else if(restDeck <= 0){
+        gameOver();
     }
+    console.log("残りカード:" + restDeck)
     const imgDiv = document.getElementById(`${selectedCards}`);
     imgDiv.remove();
     selectedCards.length=0;
     document.getElementById('chooseEnemy').disabled = true;
-    restCards -=1;
     if(restCards <= 0){
         document.getElementById('nextTurn').disabled = false;
     }
@@ -181,6 +192,11 @@ function chooseWeapon(){
     selectedCards.length=0;
     document.getElementById('chooseWeapon').disabled = true;
     restCards -=1;
+    restDeck -=1;
+    if(restDeck <=0){
+        gameOver();
+    }
+    console.log("残りカード:" + restDeck)
     if(restCards <= 0){
         document.getElementById('nextTurn').disabled = false;
     }
@@ -211,6 +227,11 @@ function choosePortion(){
     selectedCards.length=0;
     document.getElementById('choosePortion').disabled = true;
     restCards -=1;
+    restDeck -=1;
+    if(restDeck <=0){
+        gameOver();
+    }
+    console.log("残りカード:" + restDeck)
     if(restCards <= 0){
         document.getElementById('nextTurn').disabled = false;
     }
@@ -243,6 +264,7 @@ function nextTurn(){
     .then(data => {
         room = data.cards;
         openCard.push(room);
+
         restCards = openCard[0].length;
         const roomDiv = document.getElementById('room');
         roomDiv.innerHTML = ''; 
@@ -252,7 +274,6 @@ function nextTurn(){
             img.addEventListener('click',()=>chooseCards(img, index));
             img.className = 'card';
             img.id=`${index}`;
-            console.log(img.id)
             roomDiv.appendChild(img);
         });
     });
