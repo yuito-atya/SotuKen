@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HighLow</title>
+  <meta charset="UTF-8">
+    <style>
+        .card {
+            display: inline-block;
+            margin: 5px;
+        }
+        .selected {
+            border: 2px solid yellow;
+        }
+        .room {
+            margin: 20px 0;
+        }
+        img {
+            width: 100px;
+        }
+    </style>    
+</head>
+<body>
+    <div class="room" id="room"></div>
+    <button id="chosenCards" onclick="chosenCards()" disabled >カードを決定</button>
+    <button id="choosePortion" onclick="choosePortion()" disabled >ポーションを装備</button>
+    <button id="usePortion" onclick="usePortion()" disabled >ポーションを使用</button>
+    <button id="chooseWeapon" onclick="chooseWeapon()" disabled >武器を装備</button>
+    <button id="chooseEnemy" onclick="chooseEnemy()" disabled >敵に攻撃</button>
+    <button id="nextTurn" onclick="nextTurn()" disabled >次のターンへ</button>
+    <button id="oneMore" onclick="oneMore()" disabled >引き直す</button>
+    <div>
+        <h2>ステータス:</h2>
+        <p>体力: <span id="hp">20</span></p>
+        <p>攻撃力:<span id="weapon">0</span></p>
+        <p>回復力:<span id="portion">0</span></p>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
