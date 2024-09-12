@@ -10,7 +10,7 @@ let times=0;
 let deckId="";
 let restCard=""; 
 let oneMoreTime=0;
-let restDeck=0;
+let restDeck=44;
 
 //ページのロード時に実行
 window.addEventListener("load", async() => {
@@ -19,15 +19,13 @@ window.addEventListener("load", async() => {
     const response = await fetch(apiUrl);
     card = await response.json();
     deckId = card.deck_id;
-    restDeck = card.remaining;
-    console.log(restDeck);
     //最初の4枚を表示
-    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
+    await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
         .then(response => response.json())
         .then(data => {
             room = data.cards;
             openCard.push(room);
-            console.log(openCard);
+            console.log(openCard)
             console.log("openCardの長さは"+ openCard[0].length)
             const roomDiv = document.getElementById('room');
             roomDiv.innerHTML = ''; 
@@ -56,7 +54,7 @@ function chooseCards (img,index) {
         //カードを決定ボタンのON,OFF
         document.getElementById('chosenCards').disabled = selectedCards.length !== 3;
     }else if(selected ==0 && openCard[0].length <4){
-        if (selectedCards.length < 3 && !selectedCards.includes(index)) {
+        if (selectedCards.length < openCard[0].length && !selectedCards.includes(index)) {
             selectedCards.push(index);
             img.classList.add('selected');
         } else if (selectedCards.includes(index)) {
@@ -66,7 +64,6 @@ function chooseCards (img,index) {
         //カードを決定ボタンのON,OFF
         document.getElementById('chosenCards').disabled = selectedCards.length !== openCard[0].length;
     }else{
-
         const selectId =img.id;
         const card = openCard[0][selectId].code;
         console.log(card); 
@@ -114,7 +111,9 @@ function chosenCards() {
     selectedCards.length=0;
     selected = 1;
     document.getElementById('chosenCards').disabled = true;
-    restCards -=1;
+    if(restCards==4){
+        restCards -=1;
+    }
     if(portion > 0){
         document.getElementById('usePortion').disabled = false;
     }
@@ -164,11 +163,11 @@ function chooseEnemy(){
     }else if(restDeck <= 0){
         gameOver();
     }
-    console.log("残りカード:" + restDeck)
     const imgDiv = document.getElementById(`${selectedCards}`);
     imgDiv.remove();
     selectedCards.length=0;
     document.getElementById('chooseEnemy').disabled = true;
+    console.log("168:  "+restCards);
     if(restCards <= 0){
         document.getElementById('nextTurn').disabled = false;
     }
@@ -256,16 +255,18 @@ function usePortion(){
 }
 
 //次のターンへ
-function nextTurn(){
+async function nextTurn(){
     openCard.length=0;
-    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${restCard}`)
-    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
+    console.log("山札に戻るのは"+restCard);
+    await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${restCard}`)
+    await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
     .then(response => response.json())
     .then(data => {
         room = data.cards;
         openCard.push(room);
-
+        console.log("残りカード:" + restDeck);
         restCards = openCard[0].length;
+        console.log("場のカード数:"+restCards);
         const roomDiv = document.getElementById('room');
         roomDiv.innerHTML = ''; 
         room.forEach((card,index) => {
@@ -284,6 +285,7 @@ function nextTurn(){
     document.getElementById('usePortion').disabled = true;
     document.getElementById('nextTurn').disabled = true;
     document.getElementById('oneMore').disabled = false;
+    console.log("--------------------NEXT--------------------")
 }
 
 function gameOver(){
@@ -296,19 +298,20 @@ function restart(){
     window.location.href = 'HighLow.html';
 }
 
-function oneMore(){
+async function oneMore(){
     if(oneMoreTime==0){
-        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][0].code}`)
-        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][1].code}`)
-        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][2].code}`)
-        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][3].code}`)
+        await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][0].code}`)
+        await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][1].code}`)
+        await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][2].code}`)
+        await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][3].code}`)
         openCard.length=0;
-        fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
+        await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
         .then(response => response.json())
         .then(data => {
             room = data.cards;
             openCard.push(room);
             restCards = openCard[0].length;
+            console.log("残りカード:" + restDeck);
             const roomDiv = document.getElementById('room');
             roomDiv.innerHTML = ''; 
             room.forEach((card,index) => {
