@@ -288,15 +288,15 @@ async function nextTurn(){
     console.log("--------------------NEXT--------------------")
 }
 
-function gameOver(){
-    window.location.href = 'yuito.html';
-    document.getElementById('score').textContent = 1;
-    console.log(ゲームオーバー);
+function gameOver() {
+    document.getElementById('score').textContent = 1; // スコアの設定（必要に応じて変更）
+    document.getElementById('gameOverModal').style.display = "block";
 }
 
-function restart(){
-    window.location.href = 'HighLow.html';
+function closeModal() {
+    document.getElementById('gameOverModal').style.display = "none";
 }
+
 
 async function oneMore(){
     if(oneMoreTime==0){
@@ -304,6 +304,20 @@ async function oneMore(){
         await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][1].code}`)
         await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][2].code}`)
         await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][3].code}`)
+
+function restart() {
+    window.location.href = 'HighLow.html'; // 再スタートのリダイレクト先
+}
+
+function home(){
+    window.location.href = 'index.html'; //ホームに戻るリダイレクト先
+}
+async function oneMore(){
+    if(oneMoreTime==0){
+        for(let cnt = 0; cnt<openCard[0].length;cnt++){
+            await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/return/?cards=${openCard[0][cnt].code}`)
+        }
+
         openCard.length=0;
         await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
         .then(response => response.json())
@@ -337,3 +351,13 @@ async function oneMore(){
         
     }
 }
+
+function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}}}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scondrel</title>
+    <link rel="stylesheet" href="js/style.css">
+</head>
+<body>
+    <button class="rule-btn" onclick="openPopup()">ルール説明</button>
+
+    <!-- 説明画面表示 -->
+    <div class="popup" id="popup">
+        <h2>トランプゲームのルール</h2>
+        <div class="rule-content">
+            <p><strong>ゲームの目的</strong><br>
+            20のライフを持ちながら、ダンジョンを攻略していくカードゲームです。モンスターと戦い、武器を使い、回復しながら進みます。ライフが0になるか、ダンジョンのカードをすべて処理するとゲーム終了です。</p>
+
+            <p><strong>使用するカード</strong><br>
+            通常のトランプからジョーカー、赤色の絵札、赤色のAを抜いた44枚を使います。</p>
+
+            <p><strong>ライフ管理</strong><br>
+            初期ライフは20。最大値は20で、これを越えて回復できません。</p>
+
+            <p><strong>カードの役割</strong><br>
+            クラブ・スペード（モンスター）: 数字がモンスターの強さ。Aは14として扱います。<br>
+            ダイヤ（武器）: 数字が武器の強さ。<br>
+            ハート（ポーション）: 数字分ライフを回復（20を超えない）。</p>
+
+            <p><strong>ゲームの進行</strong><br>
+            カードをシャッフルして山札（ダンジョン）を作ります。山札から4枚のカードを表にして並べ、これを「ルーム」と呼びます。ルームのカードを避けたい場合は、4枚をダンジョンの底に戻すことができます。ただし、連続して避けることはできません。ルームから3枚のカードを選びます。</p>
+
+            <p><strong>カードの選択</strong><br>
+            <em>武器（ダイヤ）</em>: 装備します。すでに装備中の武器があれば、捨札にします。<br>
+            <em>ポーション（ハート）</em>: 数字分ライフを回復。1ターンに1枚のみ使用可能。<br>
+            <em>モンスター（クラブ・スペード）</em>: 素手か武器で戦います。<br>
+            <em>素手で戦う</em>: 数字分ライフが減少。<br>
+            <em>武器で戦う</em>: モンスターの数字が武器より大きければ差分のダメージを受けます。</p>
+
+            <p><strong>ゲームの終了</strong><br>
+            ライフが0になった場合: ゲームオーバー雑魚です<br>
+            ダンジョンを踏破した場合: 残りのライフがプラス点になります。最後のカードがポーションの場合、その分も加算されます。</p>
+        </div>
+        <button class="close-btn" onclick="closePopup()">閉じる</button>
+    </div>
+
+    <!-- 背景を暗くする -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+    <h1>Scondrel</h1>
+    <button onclick="location.href='HighLow.html'">start</button>
+
+    <script src="js/start.js"></script>
+</body>
+</html>
