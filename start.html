@@ -1,29 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <title>HighLow</title>
-  <link rel="stylesheet" href="js/styles.css">
-  <meta charset="UTF-8">
-    <style>
-        .card {
-            display: inline-block;
-            margin: 5px;
-        }
-        .selected {
-            border: 2px solid yellow;
-        }
-        .room {
-            margin: 20px 0;
-        }
-        img {
-            width: 100px;
-        }
-    </style>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scondrel</title>
+    <link rel="stylesheet" href="js/Rule.css">
 </head>
 <body>
-     <button class="rule-btn" onclick="openPopup()">ルール説明</button>
+    <button class="rule-btn" onclick="openPopup()">ルール説明</button>
 
-<!-- 説明画面表示 -->
+    <!-- 説明画面表示 -->
     <div class="popup" id="popup">
         <h2>トランプゲームのルール</h2>
         <div class="rule-content">
@@ -60,31 +46,11 @@
 
     <!-- 背景を暗くする -->
     <div class="overlay" id="overlay" onclick="closePopup()"></div>
-     <div class="buttons">
 
-    <div class="container">
-        <div class="dj"><img src="https://deckofcardsapi.com/static/img/back.png" alt="Card Back"></div>
-            <div class="room" id="room">
-            </div>
-    </div>
-    <div class="status-play-container">
-    <div class="status">
-        <h2>ステータス</h2>
-        <p>体力: <span id="hp">20</span></p>
-        <p>攻撃力: <span id="weapon">0</span></p>
-        <p>回復力: <span id="portion">0</span></p>
-    </div>
-    <div class="play">
-        <button id="chosenCards" onclick="chosenCards()" disabled>カードを決定</button>
-        <button id="choosePortion" onclick="choosePortion()" disabled>ポーションを装備</button>
-        <button id="usePortion" onclick="usePortion()" disabled>ポーションを使用</button>
-        <button id="chooseWeapon" onclick="chooseWeapon()" disabled>武器を装備</button>
-        <button id="chooseEnemy" onclick="chooseEnemy()" disabled>敵に攻撃</button>
-        <button id="nextTurn" onclick="nextTurn()" disabled>次のターンへ</button>
-        <button id="oneMore" onclick="oneMore()" disabled>引き直す</button>
-    </div>
-</div>
-    </div>
-    <script src="js/script.js"></script>
+    <h1>Scondrel</h1>
+    <button onclick="location.href='HighLow.html'">start</button>
+
+    <script src="js/start.js"></script>
 </body>
 </html>
+
