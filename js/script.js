@@ -289,8 +289,8 @@ async function nextTurn(){
 }
 
 function gameOver() {
-    if(hp <=0){
-        document.getElementById('score').textContent = 0; 
+    if((hp - 0) <=0){
+        document.getElementById('score').textContent = "0"; 
     }else{
         document.getElementById('score').textContent = `${hp}`+`${portion}`; // スコアの設定（必要に応じて変更）
     }
