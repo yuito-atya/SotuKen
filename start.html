@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scondrel</title>
-    <link rel="stylesheet" href="js/style.css">
+    <link rel="stylesheet" href="js/Rule.css">
 </head>
 <body>
     <button class="rule-btn" onclick="openPopup()">ルール説明</button>
@@ -33,13 +33,13 @@
             <p><strong>カードの選択</strong><br>
             <em>武器（ダイヤ）</em>: 装備します。すでに装備中の武器があれば、捨札にします。<br>
             <em>ポーション（ハート）</em>: 数字分ライフを回復。1ターンに1枚のみ使用可能。<br>
-            <em>モンスター（クラブ・スペード）</em>: 素手か武器で戦います。対象のカードをクリックすることで処理が行われます<br>
+            <em>モンスター（クラブ・スペード）</em>: 素手か武器で戦います。<br>
             <em>素手で戦う</em>: 数字分ライフが減少。<br>
-            <em>武器で戦う</em>: モンスターの数字が武器より大きければ差分のダメージを受けます。</p>
+            <em>武器で戦う</em>: モンスターの数字が武器より大きければ差分のダメージを受けます。武器は小さい数字のモンスターにしか連続で使えません。</p>
 
             <p><strong>ゲームの終了</strong><br>
             ライフが0になった場合: ゲームオーバー雑魚です<br>
-            ダンジョンを踏破した場合: 残りのライフがプラス点になります。最後のカードがポーションの場合、その分も加算されます。</p>
+            ダンジョンを踏破した場合: 残りのライフがプラス点になります。最後にポーションを装備していたら、その分も加算されます。</p>
         </div>
         <button class="close-btn" onclick="closePopup()">閉じる</button>
     </div>
@@ -53,3 +53,4 @@
     <script src="js/start.js"></script>
 </body>
 </html>
+

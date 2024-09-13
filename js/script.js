@@ -289,7 +289,12 @@ async function nextTurn(){
 }
 
 function gameOver() {
-    document.getElementById('score').textContent = 1; // スコアの設定（必要に応じて変更）
+    if(hp <=0){
+        document.getElementById('score').textContent = 0; 
+    }else{
+        document.getElementById('score').textContent = `${hp}`+`${portion}`; // スコアの設定（必要に応じて変更）
+    }
+    
     document.getElementById('gameOverModal').style.display = "block";
 }
 
@@ -351,13 +356,5 @@ async function oneMore(){
         
     }
 }
-
-function openPopup() {
-    document.getElementById('popup').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
+    }
 }
-
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-}}}
