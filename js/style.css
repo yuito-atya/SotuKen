@@ -1,81 +1,82 @@
-/* 画面全体のスタイル */
+/* 全体のスタイル */
 body {
     font-family: 'Arial', sans-serif;
+    background-color: #73c273;
     margin: 0;
     padding: 0;
-    background-color: #73c273;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 100vh;
-    position: relative;
-    color: black;
-}
-
-.rule-btn {
+  }
+  
+  /* ルール説明ボタン */
+  .rule-btn {
     position: absolute;
     top: 10px;
     left: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
     background-color: #3d6d39;
     color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-.rule-btn:hover {
-    background-color: #365e32;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    z-index: 10;
-    text-align: center;
-    width: 90%; /* 幅を広げる */
-    max-width: 500px;
-    color: white;
-    max-height: 80%; /* 縦幅制限を設定 */
-    overflow-y: auto; /* スクロールを許可 */
-}
-
-.popup h2 {
-    margin-top: 0;
-    font-size: 24px;
-}
-
-.rule-content p {
-    font-size: 16px;
-    line-height: 1.5; /* 行間を広げて読みやすくする */
-    margin-bottom: 15px; /* 段落間の余白 */
-    text-align: left; /* テキストを左揃えにする */
-}
-
-.close-btn {
-    margin-top: 20px;
     padding: 10px 20px;
-    font-size: 16px;
-    background-color: #c0392b;
-    color: white;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
-    border-radius: 5px;
-}
-
-.close-btn:hover {
+  }
+  
+  .rule-btn:hover {
+    background-color: #365e32;
+  }
+  
+  /* ポップアップウィンドウ */
+  .popup {
+    display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 10;
+      text-align: center;
+      width: 90%; /* 幅を広げる */
+      max-width: 500px;
+      color: white;
+      max-height: 80%; /* 縦幅制限を設定 */
+      overflow-y: auto; /* スクロールを許可 */
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+      font-size: 24px;
+  }
+  
+  .rule-content p {
+     font-size: 16px;
+      line-height: 1.5; /* 行間を広げて読みやすくする */
+      margin-bottom: 15px; /* 段落間の余白 */
+      text-align: left; /* テキストを左揃えにする */
+  }
+  
+  /* 閉じるボタン */
+  .close-btn {
+   margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #c0392b;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+  }
+  
+  .close-btn:hover {
     background-color: #e74c3c;
-}
-
-.overlay {
+  }
+  
+  /* オーバーレイ */
+  .overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -84,33 +85,91 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 5;
-}
-
-h1 {
-    font-size: 48px;
+  }
+  
+  
+  .container {
+    display: flex;
+    align-items: center; /* 高さを中央揃えにする */
+    text-align: center;
+  }
+  
+  .dj {
+    margin-right: 220px; /* トランプカードとの間にスペースを作る */
+    margin-left: 100px;
+  }
+  
+  .dj img {
+    width: 100px; /* 画像のサイズを設定 */
+  }
+  
+  
+  /* カードエリア */
+  .room {
     margin: 20px 0;
-    color: black;
-}
-
-button {
-    padding: 10px 30px;
-    font-size: 24px;
+    display: flex;
+    justify-content: center; /* カードを中央に揃える */
+    flex-wrap: wrap; /* カードが多い場合に折り返す */
+  }
+  
+  .card {
+    display: inline-block;
+    margin: 5px;
+    width: 100px;
+    height: auto;
+  }
+  
+  /* ボタンエリア */
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
     background-color: #3d6d39;
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 10px;
-}
-
-button:hover {
+    cursor: pointer;
+  }
+  
+  button:hover {
     background-color: #365e32;
-}
-
-button {
-    position: relative;
-    z-index: 1;
-}
-
-h1, button {
-    text-align: center;
-}
+  }
+  
+  .play{
+  margin-top: 160px;
+  }
+  
+  .status-play-container {
+    display: flex;
+    align-items: flex-start; /* 高さを上揃えにする */
+    gap: 20px; /* 要素間のスペースを追加 */
+    margin-top: 20px; /* 上部に余白を追加 */
+  }
+  
+  /* ステータスエリア */
+  .status {
+    margin-top: 20px;
+    padding: 15px; /* 内部の余白を追加 */
+    background-color: #f4f4f4; /* 背景色を追加 */
+    border: 2px solid #3d6d39; /* ボーダーを追加 */
+    border-radius: 10px; /* 角を丸くする */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* シャドウを追加 */
+    width: 150px; /* 幅を設定 */
+  }
+  
+  .status h2 {
+    margin-bottom: 10px;
+    font-size: 18px; /* フォントサイズを少し大きくする */
+    color: #3d6d39; /* ヘッダーの色を設定 */
+  }
+  
+  .status p {
+    margin: 10px 0; /* パラグラフ間の余白を増やす */
+    font-size: 16px; /* フォントサイズを調整 */
+    color: #3d6d39; /* テキストの色を設定 */
+  }
+  
